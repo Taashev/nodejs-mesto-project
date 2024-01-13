@@ -21,6 +21,8 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': 'error',
+    // правила для имен с висячими символами
+    'no-underscore-dangle': ['error', { allow: ['_id'] }],
     // правила на инкримент ++
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     // вызывов iife (function() {})()
