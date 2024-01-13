@@ -21,6 +21,8 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': 'error',
+    // проверка повторных объявлений переменных (отключаем при использовании tsc)
+    'no-redeclare': 'off',
     // правила для имен с висячими символами
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
     // правила на инкримент ++
