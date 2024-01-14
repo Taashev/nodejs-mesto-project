@@ -32,7 +32,7 @@ module.exports = {
     // разрешить / запретить анонимные функции
     'func-names': ['error'],
     // скобок вокруг функций arrow: () => 'hello';
-    'arrow-body-style': ['error', 'as-needed'],
+    'arrow-body-style': ['error', 'always'],
     // использовать export default если в файле используется всего 1 export
     'import/prefer-default-export': ['off'],
     // использования export default
