@@ -1,7 +1,13 @@
 import { Router } from 'express';
 
-import { router as userRouter } from './user';
+import { handlerNotFound } from '../middleware/notFound';
+
+import { router as usersRouter } from './users';
+import { router as cardsRouter } from './cards';
 
 export const router = Router();
 
-router.use('/users', userRouter);
+router.use('/users', usersRouter);
+router.use('/cards', cardsRouter);
+
+router.use('*', handlerNotFound);
