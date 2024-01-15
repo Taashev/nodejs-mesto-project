@@ -19,5 +19,9 @@ export function validationError(
     return next(new HttpError(messageError.badRequest));
   }
 
+  if (error.name === 'SyntaxError') {
+    return next(new HttpError(messageError.syntaxError));
+  }
+
   return next(new ServerError(messageError.serverError));
 }

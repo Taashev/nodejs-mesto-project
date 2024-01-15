@@ -31,7 +31,7 @@ import { handleErrors } from './middleware/errors';
 
   server.use(validationError, handleErrors);
 
-  server.listen(Number(PORT), '127.0.0.1', () => {
+  server.listen(Number(PORT), 'localhost', () => {
     if (NODE_ENV !== 'production') {
       // отключить eslint для вывода инфы в консоль в режиме разработки
       /* eslint-disable no-console */
