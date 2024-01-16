@@ -12,9 +12,9 @@ import { handleErrors } from './middleware/errors';
 (async function app() {
   const server = express();
 
-  const { PORT, NODE_ENV, MONGODB_URL, DB_NAME } = config;
+  const { PORT, DB_NAME, NODE_ENV } = config;
 
-  mongoose.connect(MONGODB_URL + DB_NAME);
+  mongoose.connect(`mongodb://localhost:27017/${DB_NAME}`);
 
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }));

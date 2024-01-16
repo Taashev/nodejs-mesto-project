@@ -1,8 +1,3 @@
-const {
-  PORT = '3000',
-  NODE_ENV,
-  MONGODB_URL = 'mongodb://localhost:27017/',
-  DB_NAME = 'mestodb',
-} = process.env;
+const { PORT = '3000', DB_NAME = 'mestodb', NODE_ENV } = process.env;
 
-export const config = { PORT, NODE_ENV, MONGODB_URL, DB_NAME };
+export const config = { PORT, NODE_ENV, DB_NAME };
