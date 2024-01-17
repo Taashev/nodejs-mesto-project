@@ -5,14 +5,14 @@ import { Card } from '../models/card/card';
 import { NotFoundError } from '../components/NotFoundError';
 import { ForbiddenError } from '../components/ForbiddenError';
 
-import { messageError } from '../utils/constants';
+import { STATUS_CODE, messageError } from '../utils/constants';
 
 export function createCard(req: Request, res: Response, next: NextFunction) {
   const { name, link, creatorId } = req.body;
 
   Card.create({ name, link, owner: creatorId })
     .then((card) => {
-      res.status(201).send(card);
+      res.status(STATUS_CODE.created).send(card);
     })
     .catch(next);
 }

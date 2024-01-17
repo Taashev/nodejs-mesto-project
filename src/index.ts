@@ -6,7 +6,7 @@ import { router } from './routes';
 import { allLogger, infoLogger, warnLogger, errorLogger } from './utils/logger';
 
 import { authFake } from './middleware/authFake';
-import { validationError } from './utils/validationError';
+import { validationError } from './middleware/validationError';
 import { handleErrors } from './middleware/errors';
 
 (async function app() {

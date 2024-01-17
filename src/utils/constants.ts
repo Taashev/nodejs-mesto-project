@@ -12,3 +12,11 @@ export const messageError = {
   forbiddenError: 'У вас нет на это прав',
   syntaxError: 'Синтаксическая ошибка',
 };
+
+export const STATUS_CODE = {
+  created: 201,
+  badRequest: 400,
+  forbidden: 403,
+  notFound: 404,
+  serverError: 500,
+};

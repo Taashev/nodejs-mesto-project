@@ -78,19 +78,19 @@ npm run dev
 PORT=3001 npm run dev
 ```
 \
-*Установить зависимости*
+**Установить зависимости**
 ```sh
 npm i
 ```
-*Запустить проект в режиме разработки*
+**Запустить проект в режиме разработки**
 ```sh
 npm run dev
 ```
-*Собрать проект*
+**Собрать проект**
 ```sh
 npm build
 ```
-*Запустить сборку*
+**Запустить сборку**
 ```sh
 npm run start
 ```
@@ -112,3 +112,7 @@ npm run start
 `PUT/` **/cards/:cardId/likes** - добавить лайк карточке \
 `DELETE` **/cards/:cardId** - удалить карточку \
 `DELETE` **/cards/:cardId/likes** - удалить лайк у карточки
+
+---
+
+### [GitHub репозиторий проекта](https://github.com/Taashev/nodejs-mesto-project)

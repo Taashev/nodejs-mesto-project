@@ -4,7 +4,7 @@ import { User } from '../models/user/user';
 
 import { NotFoundError } from '../components/NotFoundError';
 
-import { messageError } from '../utils/constants';
+import { STATUS_CODE, messageError } from '../utils/constants';
 
 export function getUsers(req: Request, res: Response, next: NextFunction) {
   User.find({})
@@ -34,7 +34,7 @@ export function createUser(req: Request, res: Response, next: NextFunction) {
   User.create({ name, about, avatar })
     .then((user) => {
       res
-        .status(201)
+        .status(STATUS_CODE.created)
         .send({ name: user.name, about: user.about, avatar: user.avatar });
     })
     .catch(next);

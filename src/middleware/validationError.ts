@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { HttpError } from '../components/HttpError';
 import { ServerError } from '../components/ServerError';
 
-import { messageError } from './constants';
+import { messageError } from '../utils/constants';
 
 export function validationError(
   error: any,
