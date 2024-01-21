@@ -8,9 +8,10 @@ import { ForbiddenError } from '../components/ForbiddenError';
 import { STATUS_CODE, messageError } from '../utils/constants';
 
 export function createCard(req: Request, res: Response, next: NextFunction) {
-  const { name, link, creatorId } = req.body;
+  const { name, link } = req.body;
+  const userId = req.user._id;
 
-  Card.create({ name, link, owner: creatorId })
+  Card.create({ name, link, owner: userId })
     .then((card) => {
       res.status(STATUS_CODE.created).send(card);
     })
@@ -34,8 +35,8 @@ export function deleteCard(req: Request, res: Response, next: NextFunction) {
         throw new NotFoundError(messageError.cardNotFound);
       }
 
-      const ownerId = card?.owner.toString();
-      const userId = req.user.id;
+      const ownerId = card.owner.toString();
+      const userId = req.user._id;
 
       if (ownerId !== userId) {
         throw new ForbiddenError(messageError.forbiddenError);
@@ -52,7 +53,7 @@ export function deleteCard(req: Request, res: Response, next: NextFunction) {
 
 export function addLikeCard(req: Request, res: Response, next: NextFunction) {
   const { cardId } = req.params;
-  const userId = req.user.id;
+  const userId = req.user._id;
 
   Card.findByIdAndUpdate(
     cardId,
@@ -78,7 +79,7 @@ export function deleteLikeCard(
   next: NextFunction,
 ) {
   const { cardId } = req.params;
-  const userId = req.user.id;
+  const userId = req.user._id;
 
   Card.findByIdAndUpdate(
     cardId,

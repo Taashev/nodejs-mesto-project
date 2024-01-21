@@ -1,7 +1,6 @@
 import { Router } from 'express';
 
 import {
-  createUser,
   getUser,
   getUsers,
   updateUserProfile,
@@ -13,8 +12,6 @@ export const router = Router();
 router.get('/', getUsers);
 
 router.get('/:userId', getUser);
-
-router.post('/', createUser);
 
 router.patch('/me', updateUserProfile);
 
