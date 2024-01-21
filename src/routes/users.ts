@@ -5,11 +5,14 @@ import {
   getUsers,
   updateUserProfile,
   updateUserAvatar,
+  getCurrentUser,
 } from '../controllers/users';
 
 export const router = Router();
 
 router.get('/', getUsers);
+
+router.get('/me', getCurrentUser);
 
 router.get('/:userId', getUser);
 
