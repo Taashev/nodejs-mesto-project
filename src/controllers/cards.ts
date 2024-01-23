@@ -7,6 +7,14 @@ import { ForbiddenError } from '../components/ForbiddenError';
 
 import { STATUS_CODE, messageError } from '../utils/constants';
 
+export function getCards(req: Request, res: Response, next: NextFunction) {
+  Card.find({})
+    .then((cards) => {
+      res.send(cards);
+    })
+    .catch(next);
+}
+
 export function createCard(req: Request, res: Response, next: NextFunction) {
   const { name, link } = req.body;
   const userId = req.user._id;
@@ -14,14 +22,6 @@ export function createCard(req: Request, res: Response, next: NextFunction) {
   Card.create({ name, link, owner: userId })
     .then((card) => {
       res.status(STATUS_CODE.created).send(card);
-    })
-    .catch(next);
-}
-
-export function getCards(req: Request, res: Response, next: NextFunction) {
-  Card.find({})
-    .then((cards) => {
-      res.send(cards);
     })
     .catch(next);
 }

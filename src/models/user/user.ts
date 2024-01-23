@@ -1,27 +1,35 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 import validator from 'validator';
 
 import { messageError } from '../../utils/constants';
 
+import { userConfig } from './userConfig';
 import { UserType } from './user.d';
 
-const userSchema = new mongoose.Schema<UserType>({
+const { name, about, avatar, password } = userConfig;
+
+const userSchema = new Schema<UserType>({
   name: {
     type: String,
-    minlength: 2,
-    maxlength: 30,
-    default: 'Жак-Ив Кусто',
+    minlength: name.minlength,
+    maxlength: name.maxlength,
+    default: name.default,
   },
   about: {
     type: String,
-    minlength: 2,
-    maxlength: 200,
-    default: 'Исследователь',
+    minlength: about.minlength,
+    maxlength: about.maxlength,
+    default: about.default,
   },
   avatar: {
     type: String,
-    default:
-      'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
+    validate: {
+      validator(url: string) {
+        return avatar.regexpUrl.test(url);
+      },
+      message: messageError.badRequest,
+    },
+    default: avatar.default,
   },
   email: {
     type: String,
@@ -38,8 +46,8 @@ const userSchema = new mongoose.Schema<UserType>({
     type: String,
     required: true,
     select: false,
-    minlength: 3,
+    minlength: password.minlength,
   },
 });
 
-export const User = mongoose.model<UserType>('user', userSchema);
+export const User = model<UserType>('user', userSchema);

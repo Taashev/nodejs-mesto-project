@@ -1,17 +1,26 @@
 import { Schema, model } from 'mongoose';
 
+import { messageError } from '../../utils/constants';
+
+import { cardConfig } from './cardConfig';
 import { CardType } from './card.d';
 
 const cardSchema = new Schema<CardType>({
   name: {
     type: String,
     required: true,
-    minlength: 2,
-    maxlength: 30,
+    minlength: cardConfig.name.minlength,
+    maxlength: cardConfig.name.maxlength,
   },
   link: {
     type: String,
     required: true,
+    validate: {
+      validator(url: string) {
+        return cardConfig.link.regexpUrl.test(url);
+      },
+      message: messageError.badRequest,
+    },
   },
   owner: {
     type: Schema.Types.ObjectId,

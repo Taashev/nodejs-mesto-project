@@ -3,6 +3,10 @@ import { Router } from 'express';
 import { handlerNotFound } from '../middleware/notFound';
 
 import { auth } from '../middleware/auth';
+import {
+  signinValidator,
+  signupValidator,
+} from '../middleware/requestValidator';
 
 import { router as signinRouter } from './signin';
 import { router as signupRouter } from './signup';
@@ -11,8 +15,8 @@ import { router as cardsRouter } from './cards';
 
 export const router = Router();
 
-router.use('/signin', signinRouter);
-router.use('/signup', signupRouter);
+router.use('/signin', signinValidator, signinRouter);
+router.use('/signup', signupValidator, signupRouter);
 
 router.use(auth);
 

@@ -8,14 +8,19 @@ import {
   deleteLikeCard,
 } from '../controllers/cards';
 
+import {
+  createCardValidator,
+  idCardParamsValidator,
+} from '../middleware/requestValidator';
+
 export const router = Router();
 
 router.get('/', getCards);
 
-router.post('/', createCard);
+router.post('/', createCardValidator, createCard);
 
-router.delete('/:cardId', deleteCard);
+router.delete('/:cardId', idCardParamsValidator, deleteCard);
 
-router.put('/:cardId/likes', addLikeCard);
+router.put('/:cardId/likes', idCardParamsValidator, addLikeCard);
 
-router.delete('/:cardId/likes', deleteLikeCard);
+router.delete('/:cardId/likes', idCardParamsValidator, deleteLikeCard);

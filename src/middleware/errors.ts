@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
+import { STATUS_CODE, messageError } from '../utils/constants';
+
 export function handleErrors(
   error: any,
   req: Request,
@@ -10,5 +12,10 @@ export function handleErrors(
   // eslint-disable-next-line no-unused-vars
   next: NextFunction,
 ) {
-  res.status(error.statusCode).send({ message: error.message });
+  const {
+    statusCode = STATUS_CODE.serverError,
+    message = messageError.serverError,
+  } = error;
+
+  res.status(statusCode).send({ message });
 }

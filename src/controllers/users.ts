@@ -4,11 +4,16 @@ import jwt from 'jsonwebtoken';
 
 import { User } from '../models/user/user';
 
-import { HttpError } from '../components/HttpError';
 import { NotFoundError } from '../components/NotFoundError';
 import { UnauthorizedError } from '../components/UnauthorizedError';
 
-import { NODE_ENV, SECRET_KEY } from '../config';
+import {
+  COOKIE_MAX_AGE,
+  NODE_ENV,
+  SALT_LENGTH,
+  SECRET_KEY,
+  TOKEN_EXPIRES_IN,
+} from '../config';
 import { STATUS_CODE, messageError } from '../utils/constants';
 
 export function login(req: Request, res: Response, next: NextFunction) {
@@ -28,13 +33,13 @@ export function login(req: Request, res: Response, next: NextFunction) {
       }
 
       const token = jwt.sign({ _id: user._id }, SECRET_KEY, {
-        expiresIn: '7d',
+        expiresIn: TOKEN_EXPIRES_IN,
       });
 
       res
         .cookie('token', token, {
           secure: NODE_ENV === 'production',
-          maxAge: 3_600_000 * 24 * 7, // 7d
+          maxAge: COOKIE_MAX_AGE,
           httpOnly: true,
         })
         .send({
@@ -51,12 +56,8 @@ export function login(req: Request, res: Response, next: NextFunction) {
 export function createUser(req: Request, res: Response, next: NextFunction) {
   const { name, about, avatar, email, password } = req.body;
 
-  if (password.length < 3) {
-    throw new HttpError(messageError.passwordRegistrationError);
-  }
-
   bcrypt
-    .hash(password, 10)
+    .hash(password, SALT_LENGTH)
     .then(async (hashPassword) => {
       return User.create({
         name,
@@ -123,12 +124,12 @@ export function updateUserProfile(
   res: Response,
   next: NextFunction,
 ) {
-  const { name, about, email } = req.body;
+  const { name, about } = req.body;
   const userId = req.user._id;
 
   User.findByIdAndUpdate(
     userId,
-    { name, about, email },
+    { name, about },
     { new: true, runValidators: true },
   )
     .then((user) => {
