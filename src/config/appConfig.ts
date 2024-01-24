@@ -1,8 +1,13 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const {
+  HOST_NAME = 'localhost',
   PORT = '3000',
   DB_NAME = 'mestodb',
   SECRET_KEY = 'secret-key',
-  NODE_ENV,
+  NODE_ENV = 'development',
 } = process.env;
 
 /** @cookie max age 7d */
@@ -15,6 +20,7 @@ const TOKEN_EXPIRES_IN = '7d';
 const SALT_LENGTH = 10;
 
 export {
+  HOST_NAME,
   PORT,
   DB_NAME,
   NODE_ENV,
