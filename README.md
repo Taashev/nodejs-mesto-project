@@ -68,7 +68,7 @@ npm i -g typescript
 Список пременных окружения по умолчанию:
 ```sh
 NODE_ENV=development
-DB_NAME=my_db
+DB_NAME=mestodb
 HOST_NAME=localhost
 PORT=3000
 SECRET_KEY=secret-key
