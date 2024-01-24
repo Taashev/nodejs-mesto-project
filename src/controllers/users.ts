@@ -1,20 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
-import { User } from '../models/user/user';
+import { User } from '../models/user';
 
 import { NotFoundError } from '../components/NotFoundError';
 import { UnauthorizedError } from '../components/UnauthorizedError';
 
-import {
-  COOKIE_MAX_AGE,
-  NODE_ENV,
-  SALT_LENGTH,
-  SECRET_KEY,
-  TOKEN_EXPIRES_IN,
-} from '../config';
+import { COOKIE_MAX_AGE, NODE_ENV } from '../config/appConfig';
+
 import { STATUS_CODE, messageError } from '../utils/constants';
+import { hashPassword } from '../utils/hashPassword';
+import { getToken } from '../utils/getToken';
 
 export function login(req: Request, res: Response, next: NextFunction) {
   const { email, password } = req.body;
@@ -32,15 +28,13 @@ export function login(req: Request, res: Response, next: NextFunction) {
         throw new UnauthorizedError(messageError.userAuth);
       }
 
-      const token = jwt.sign({ _id: user._id }, SECRET_KEY, {
-        expiresIn: TOKEN_EXPIRES_IN,
-      });
+      const token = getToken({ _id: user._id });
 
       res
         .cookie('token', token, {
-          secure: NODE_ENV === 'production',
-          maxAge: COOKIE_MAX_AGE,
           httpOnly: true,
+          maxAge: COOKIE_MAX_AGE,
+          secure: NODE_ENV === 'production',
         })
         .send({
           _id: user._id,
@@ -56,15 +50,14 @@ export function login(req: Request, res: Response, next: NextFunction) {
 export function createUser(req: Request, res: Response, next: NextFunction) {
   const { name, about, avatar, email, password } = req.body;
 
-  bcrypt
-    .hash(password, SALT_LENGTH)
-    .then(async (hashPassword) => {
+  hashPassword(password)
+    .then((hash) => {
       return User.create({
         name,
         about,
         avatar,
         email,
-        password: hashPassword,
+        password: hash,
       });
     })
     .then((user) => {

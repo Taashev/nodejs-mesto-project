@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { Card } from '../models/card/card';
+import { Card } from '../models/card';
 
 import { NotFoundError } from '../components/NotFoundError';
 import { ForbiddenError } from '../components/ForbiddenError';

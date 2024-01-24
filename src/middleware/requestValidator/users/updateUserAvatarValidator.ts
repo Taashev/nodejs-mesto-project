@@ -1,6 +1,6 @@
 import { celebrate, Joi } from 'celebrate';
 
-import { userConfig } from '../../../models/user/userConfig';
+import { userConfig } from '../../../config/userConfig';
 
 const { avatar } = userConfig;
 

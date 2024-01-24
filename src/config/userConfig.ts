@@ -1,4 +1,4 @@
-import { regexpUrl } from '../../utils/constants';
+import { regexpUrl } from '../utils/constants';
 
 export const userConfig = {
   name: {
@@ -15,8 +15,5 @@ export const userConfig = {
     regexpUrl,
     default:
       'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
-  },
-  password: {
-    minlength: 3,
   },
 };

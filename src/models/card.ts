@@ -1,9 +1,10 @@
 import { Schema, model } from 'mongoose';
 
-import { messageError } from '../../utils/constants';
+import { messageError } from '../utils/constants';
 
-import { cardConfig } from './cardConfig';
-import { CardType } from './card.d';
+import { cardConfig } from '../config/cardConfig';
+
+import { CardType } from '../types/model/card.d';
 
 const cardSchema = new Schema<CardType>({
   name: {

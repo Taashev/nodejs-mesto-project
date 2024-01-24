@@ -1,6 +1,6 @@
 import { celebrate, Joi } from 'celebrate';
 
-import { cardConfig } from '../../../models/card/cardConfig';
+import { cardConfig } from '../../../config/cardConfig';
 
 export const createCardValidator = celebrate({
   body: Joi.object().keys({

@@ -1,4 +1,4 @@
-import { regexpUrl } from '../../utils/constants';
+import { regexpUrl } from '../utils/constants';
 
 export const cardConfig = {
   name: {

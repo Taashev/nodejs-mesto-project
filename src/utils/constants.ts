@@ -20,7 +20,6 @@ export const messageError = {
   tokenError:
     'При авторизации произошла ошибка. Токен не передан или передан не в том формате',
   emailError: 'Поле email заполнено некорректно',
-  passwordRegistrationError: 'Поле password заполнено некорректно',
 };
 
 export const STATUS_CODE = {

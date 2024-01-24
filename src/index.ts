@@ -3,17 +3,17 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import celebrate from 'celebrate';
 
-import { PORT, DB_NAME, NODE_ENV } from './config';
-import { router } from './routes';
 import {
   allLogger,
   infoLogger,
   warnLogger,
   errorLogger,
 } from './middleware/logger';
-
 import { validationError } from './middleware/validationError';
 import { handleErrors } from './middleware/errors';
+
+import { router } from './routes';
+import { PORT, DB_NAME, NODE_ENV } from './config/appConfig';
 
 (async function app() {
   const server = express();

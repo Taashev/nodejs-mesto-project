@@ -1,12 +1,12 @@
 import { Schema, model } from 'mongoose';
 import validator from 'validator';
 
-import { messageError } from '../../utils/constants';
+import { messageError } from '../utils/constants';
 
-import { userConfig } from './userConfig';
-import { UserType } from './user.d';
+import { userConfig } from '../config/userConfig';
+import { UserType } from '../types/model/user.d';
 
-const { name, about, avatar, password } = userConfig;
+const { name, about, avatar } = userConfig;
 
 const userSchema = new Schema<UserType>({
   name: {
@@ -46,7 +46,6 @@ const userSchema = new Schema<UserType>({
     type: String,
     required: true,
     select: false,
-    minlength: password.minlength,
   },
 });
 
