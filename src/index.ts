@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import celebrate from 'celebrate';
 import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
+import cors from 'cors';
 
 import {
   allLogger,
@@ -13,12 +15,17 @@ import { validationError } from './middleware/validationError';
 import { handleErrors } from './middleware/errors';
 
 import { router } from './routes';
+import { helmetConfig } from './config/helmetConfig';
+import { corsConfig } from './config/corsConfig';
 import { HOST_NAME, PORT, DB_NAME, NODE_ENV } from './config/appConfig';
 
 (async function app() {
   mongoose.connect(`mongodb://localhost:27017/${DB_NAME}`);
 
   const server = express();
+
+  server.use(cors(corsConfig));
+  server.use(helmet(helmetConfig));
 
   server.use(express.json());
   server.use(express.urlencoded({ extended: true }));

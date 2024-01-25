@@ -47,6 +47,16 @@ export function login(req: Request, res: Response, next: NextFunction) {
     .catch(next);
 }
 
+export function logout(req: Request, res: Response) {
+  res
+    .clearCookie('token', {
+      maxAge: -1,
+      httpOnly: true,
+      secure: NODE_ENV === 'production',
+    })
+    .send('До скорой встречи');
+}
+
 export function createUser(req: Request, res: Response, next: NextFunction) {
   const { name, about, avatar, email, password } = req.body;
 
