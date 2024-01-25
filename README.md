@@ -96,7 +96,8 @@ npm run start
 ## API
 
 `POST` **/signin** - авторизоваться \
-`POST` **/signup** - создать пользователя
+`POST` **/signup** - создать пользователя \
+`GET`   **/signout** - выйти из системы \
 
 #### #users
 
